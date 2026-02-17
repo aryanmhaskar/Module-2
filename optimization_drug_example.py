@@ -28,13 +28,16 @@ def escitalopram(x):  # weaker efficacy, low toxicity
     toxicity = 0.1 * x**2 / 120
     return efficacy - escitalopram_lambda * toxicity
 
+def combined_effect(x):
+    return metformin(x) + lisinopril(x) + escitalopram(x)
+
 #%% plot drug efficacies
 x = np.linspace(0, 15, 100)
 fig, ax = plt.subplots(figsize=(10, 6))
 plt.plot(x, metformin(x), label='Metformin', color='blue')
 plt.plot(x, lisinopril(x), label='Lisinopril', color='orange')
 plt.plot(x, escitalopram(x), label='Escitalopram', color='green')
-plt.plot(x, metformin(x) + lisinopril(x) + escitalopram(x), label='Combined Effect', color='red', linestyle='--')
+plt.plot(x, combined_effect(x), label='Combined Effect', color='red', linestyle='--')
 plt.title('Drug Efficacy vs Dosage')
 plt.xlabel('Dosage (mg)')
 plt.ylabel('Net Effect')
