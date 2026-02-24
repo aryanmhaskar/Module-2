@@ -80,6 +80,11 @@ opt_dose_escitalopram, opt_effect_escitalopram = steepest_ascent(escitalopram, x
 print(f"Steepest Ascent Method - Optimal Escitalopram Dose: {opt_dose_escitalopram:.2f} mg")
 print(f"Steepest Ascent Method - Optimal Escitalopram Effect: {opt_effect_escitalopram*100:.2f}%")
 
+# combined effect (all three drugs)
+opt_dose_combined, opt_effect_combined = steepest_ascent(combined_effect, x0=1.0)
+print(f"Steepest Ascent Method - Optimal Combined Dose: {opt_dose_combined:.2f} mg")
+print(f"Steepest Ascent Method - Optimal Combined Effect: {opt_effect_combined*100:.2f}%")
+
 # %% Newton's method
 
 # requires second derivative
@@ -120,3 +125,10 @@ print(f"Newton's Method - Optimal Lisinopril Effect: {opt_effect_lisinopril_nm*1
 opt_dose_escitalopram_nm, opt_effect_escitalopram_nm = newtons_method(escitalopram, x0=1.0)
 print(f"Newton's Method - Optimal Escitalopram Dose: {opt_dose_escitalopram_nm:.2f} mg")
 print(f"Newton's Method - Optimal Escitalopram Effect: {opt_effect_escitalopram_nm*100:.2f}%")
+
+# combined effect (all three drugs)
+opt_dose_combined_nm, opt_effect_combined_nm = newtons_method(combined_effect, x0=1.0)
+print(f"Newton's Method - Optimal Combined Dose: {opt_dose_combined_nm:.2f} mg")
+print(f"Newton's Method - Optimal Combined Effect: {opt_effect_combined_nm*100:.2f}%")
+
+# %%
