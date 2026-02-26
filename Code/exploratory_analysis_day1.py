@@ -41,7 +41,6 @@ plt.ylabel('Active Reported Daily Cases')
 plt.legend()
 plt.grid(True)
 
-<<<<<<< Updated upstream
 plt.show()
 
 
@@ -74,6 +73,3 @@ period of time during which the virus can be transmitted to others, so if the in
 period is long, it could lead to more cases and a prolonged outbreak curve. 
 
 '''
-=======
-plt.show()
->>>>>>> Stashed changes
