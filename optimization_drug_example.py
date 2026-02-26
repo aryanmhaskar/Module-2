@@ -126,12 +126,9 @@ opt_dose_escitalopram_nm, opt_effect_escitalopram_nm = newtons_method(escitalopr
 print(f"Newton's Method - Optimal Escitalopram Dose: {opt_dose_escitalopram_nm:.2f} mg")
 print(f"Newton's Method - Optimal Escitalopram Effect: {opt_effect_escitalopram_nm*100:.2f}%")
 
-<<<<<<< Updated upstream
 # combined effect (all three drugs)
 opt_dose_combined_nm, opt_effect_combined_nm = newtons_method(combined_effect, x0=1.0)
 print(f"Newton's Method - Optimal Combined Dose: {opt_dose_combined_nm:.2f} mg")
 print(f"Newton's Method - Optimal Combined Effect: {opt_effect_combined_nm*100:.2f}%")
 
-=======
->>>>>>> Stashed changes
 # %%
