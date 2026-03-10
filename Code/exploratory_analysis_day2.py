@@ -46,3 +46,19 @@ Hantavirus refers to a group of rodent-borne viruses in the family Hantaviridae 
 How accurate do you think your R0 estimate is?
 Given that our R0 estimate is 0.12, which is much lower than typical values for infectious diseases, it is likely that our estimate is not accurate. We think it is too early in the disease process to get a good estimate as there is likely underreporting and misreporting of the data. We have little knowledge to when the infection truly started/its infection/transmission rates, etc. We predict that our estimates for R0 will become more accurate as the disease progresses throughout the population. 
 '''
+
+# TODO: Implement SEIR Modeling. Plot Euler's Method solutions for I(t) and comapre to the data. Guess beta, sigma, and gamma parameters and calculate SSE. 
+''' INPUTS: timepoints, N, S0, E0, I0, R0, data
+• Initialize a range for beta, sigma, and gamma
+• Initialize an empty array of SSE
+• Make arrays of values given each range for each parameter
+• For b in beta
+• For s in sigma
+• For g in gamma
+• Use the Euler method function you developed to calculate S, E, I, and R given those
+parameters
+• Calculate the SSE given the model results and the data and append this to the SSE
+array
+• Determine parameters corresponding to lowest SSE
+• Return best_beta, best_sigma, and best_gamma and corresponding SSE'''
+
