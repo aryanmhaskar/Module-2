@@ -34,6 +34,7 @@ plt.grid(True)
 
 plt.show()
 
+
 '''
 What viruses have a similar R0? Use the viruses.html file to find a virus or 2 with a similar R0 and give a 1-2 sentence background of the diseases.
 Our R0 estimate is 0.12, which is very small compared to most viruses. The closest viruses in viruses.html are Nipah, Hendra, and Hantavirus which have values of R0 = 0.5. These viruses 
@@ -62,3 +63,40 @@ array
 • Determine parameters corresponding to lowest SSE
 • Return best_beta, best_sigma, and best_gamma and corresponding SSE'''
 
+
+# INPUTS: beta, sigma, gamma, S0, E0, I0, R0, timepoints, N
+
+def seir_euler(beta, sigma, gamma, S0, E0, I0, R0, timepoints, N):
+
+    # time step
+    dt = timepoints[1] - timepoints[0]
+
+    # Initialize S, E, I, and R as empty arrays or lists
+    S = np.zeros(len(timepoints))
+    E = np.zeros(len(timepoints))
+    I = np.zeros(len(timepoints))
+    R = np.zeros(len(timepoints))
+
+    # Set first item in each list equal to initial values S0, E0, I0, R0
+    S[0] = S0
+    E[0] = E0
+    I[0] = I0
+    R[0] = R0
+
+    # For each timepoint in timepoints:
+    for t in range(len(timepoints) - 1):
+
+        # Calculate the four derivatives at timepoint
+        dSdt = -beta * S[t] * I[t] / N
+        dEdt = beta * S[t] * I[t] / N - sigma * E[t]
+        dIdt = sigma * E[t] - gamma * I[t]
+        dRdt = gamma * I[t]
+
+        # Calculate S, E, I, and R at timepoint + 1 using Euler’s method
+        S[t+1] = S[t] + dSdt * dt
+        E[t+1] = E[t] + dEdt * dt
+        I[t+1] = I[t] + dIdt * dt
+        R[t+1] = R[t] + dRdt * dt
+
+    # Return S, E, I, and R
+    return S, E, I, R
