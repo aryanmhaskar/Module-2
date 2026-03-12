@@ -88,7 +88,7 @@ peak_day = t_extended[np.argmax(I)]
 peak_val = np.max(I)
 print(f"\nPredicted peak: {peak_val:.0f} active cases on day {int(peak_day)}")
 
-# ── Plot ──────────────────────────────────────────────────────────────────────
+# Plot
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Left panel: model vs data over the data window
@@ -105,17 +105,17 @@ ax.grid(alpha=0.3)
 
 plt.show()
 
-# ── Load full dataset (Release 3, days 1-120) ─────────────────────────────────
+# Load full dataset (Release 3, days 1-120)
 df = pd.read_csv('Data\mystery_virus_daily_active_counts_RELEASE#3.csv')
 data_days = df['day'].values
 data_I    = df['active reported daily cases'].values
 
-# ── True peak from data ───────────────────────────────────────────────────────
+# True peak from data 
 true_peak_val = np.max(data_I)
 true_peak_day = data_days[np.argmax(data_I)]
 print(f"True peak:  {true_peak_val} cases on day {true_peak_day}")
 
-# ── Model prediction (best-fit params from Release 2 grid search) ─────────────
+# Model prediction (best-fit params from Release 2 grid search) 
 N     = 20_000
 beta  = 0.490
 sigma = 0.410
@@ -133,7 +133,7 @@ model_peak_val = np.max(I)
 model_peak_day = t_extended[np.argmax(I)]
 print(f"Model peak: {model_peak_val:.1f} cases on day {model_peak_day:.0f}")
 
-# ── True % relative error ─────────────────────────────────────────────────────
+# True % relative error
 # Formula: % et = (true_value - approximation) / true_value * 100
 pct_err_y = (true_peak_val - model_peak_val) / true_peak_val * 100
 pct_err_x = (true_peak_day - model_peak_day) / true_peak_day * 100
