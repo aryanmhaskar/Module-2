@@ -122,34 +122,31 @@ S_post70, E_post70, I_post70, R_post70 = seir_euler(
 )
 
 
-# vaccination intervention scenario
+# mask mandate intervention scenario
 
 days_plot = np.arange(day_start, day_end + 1)
 
-# copy the SEIR arrays so we can simulate vaccination separately
-S_vac = S_post70.copy()
-E_vac = E_post70.copy()
-I_vac = I_post70.copy()
-R_vac = R_post70.copy()
+# reduce transmission by 40%
+beta_mask = beta_new * 0.6
 
-# apply vaccination on day 70
-vaccinated = 2000
-efficacy = 0.9
-S_vac[0] -= vaccinated * efficacy   # remove effectively immunized from susceptible
-R_vac[0] += vaccinated * efficacy   # add them to recovered (immune)
+# copy SEIR arrays to simulate mask mandate separately
+S_mask = S_post70.copy()
+E_mask = E_post70.copy()
+I_mask = I_post70.copy()
+R_mask = R_post70.copy()
 
-# continue SEIR simulation from day 70 with vaccination
+# continue SEIR simulation from day 70 with reduced transmission
 for idx in range(len(days_plot) - 1):
-    dS = -beta_new * S_vac[idx] * I_vac[idx] / N
-    dE = beta_new * S_vac[idx] * I_vac[idx] / N - sigma_new * E_vac[idx]
-    dI = sigma_new * E_vac[idx] - gamma_new * I_vac[idx]
-    dR = gamma_new * I_vac[idx]
 
-    # update compartments for next day
-    S_vac[idx + 1] = S_vac[idx] + dS
-    E_vac[idx + 1] = E_vac[idx] + dE
-    I_vac[idx + 1] = I_vac[idx] + dI
-    R_vac[idx + 1] = R_vac[idx] + dR
+    dS = -beta_mask * S_mask[idx] * I_mask[idx] / N
+    dE = beta_mask * S_mask[idx] * I_mask[idx] / N - sigma_new * E_mask[idx]
+    dI = sigma_new * E_mask[idx] - gamma_new * I_mask[idx]
+    dR = gamma_new * I_mask[idx]
+
+    S_mask[idx + 1] = S_mask[idx] + dS
+    E_mask[idx + 1] = E_mask[idx] + dE
+    I_mask[idx + 1] = I_mask[idx] + dI
+    R_mask[idx + 1] = R_mask[idx] + dR
 
 
 # plot results
@@ -165,12 +162,13 @@ axes[0].set_title('Model vs Observed: Days 70-120')
 axes[0].legend()
 axes[0].grid(alpha=0.3)
 
-# right: SEIR model with and without vaccination
+# right: SEIR model with mask mandate
 axes[1].plot(days_plot, I_post70, label='No Intervention', color='steelblue')
-axes[1].plot(days_plot, I_vac, label='Vaccination Day 70', color='green')
+axes[1].plot(days_plot, I_mask, label='Mask Mandate Day 70 (40% Transmission Reduction)', color='green')
+
 axes[1].set_xlabel('Day')
 axes[1].set_ylabel('Active cases')
-axes[1].set_title('Effect of Vaccinating 2000 Students')
+axes[1].set_title('Effect of Mask Mandate Starting Day 70')
 axes[1].legend()
 axes[1].grid(alpha=0.3)
 
